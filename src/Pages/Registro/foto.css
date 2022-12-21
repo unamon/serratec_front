@@ -1,0 +1,22 @@
+input[type=file]{
+    display: none;
+}
+
+.file{
+    margin-top: 2rem;
+    padding: 0;
+    width: 100%;
+    text-align: center;
+
+    overflow: hidden;
+    box-sizing: border-box;
+    background-color: #333;
+    color: #FFF;
+    text-transform: uppercase;
+    text-align: center;
+    cursor: pointer;
+    padding: 19.5px;
+    display: block;
+    border-radius: 4px;
+}
+

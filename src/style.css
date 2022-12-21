@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Secular+One&display=swap');
+
+:root {
+  font-size: 62.5%;
+  --primary-color: #e7c891;
+  --background: #1a1a1a;
+  --secondary-color: #dee4f7;
+  --third-color: #456bf6;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--background);
+  width: calc(100vw-0.2rem);
+  font-family: 'Secular One', sans-serif;
+  overflow-x: hidden;
+}

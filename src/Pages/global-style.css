@@ -1,0 +1,26 @@
+:root {
+  font-size: 85.5%;
+  --primary-color: #121212;
+  --background: #121212;
+  --secondary-color: #3f3e3e;
+  --third-color: #c7c7c7;
+  --fourth-color: #3f3e3e;
+  --color: #fff
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* body {
+  background-color: #121212;
+  width: calc(100vw-0.2rem);
+  font-family: 'Times New Roman', Times, serif;
+  overflow-x: hidden;
+} */
+
+div#root{
+  margin: 0;
+}
