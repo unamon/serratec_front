@@ -28,30 +28,32 @@ import { Wrapper, Pesquisa, Input, Submit, Textarea,Barra   } from "./style";
 import { ItemInventario } from "../../Components/ItemInventario";
 
 //import Axios
-import { api } from "../../Services/api";
+import { ApiComm, api } from "../../Services/api";
 //import Reports
 import { inventarioPdf } from "../../Reports/Inventario";
+
+const api2 = new ApiComm()
 
 export const Inventario = () => {
     const [open, setOpen] = useState(false)
     const [nome, setNome] = useState()
     const [busca, setBusca] = useState("")
     const [materiais, setMateriais] = useState([])
+    const [pessoa, setPessoas] = useState([])
+    const [categoria, setCategorias] = useState([])
     const [descricao, setDescricao] = useState()
-    const [categoria, setCategoria] = useState([])
     const [categoriaId, setCategoriaId] = useState()
     const [dateDev, setDateDev] = useState()
     const [dateEnt, setDateEnt] = useState()
     const [tipoOrigem, setTipoOrigem] = useState()
     const [pessoaOrigemid, setPessoaOrigemid] = useState()
-    const [pessoa, setPessoa] = useState([])
     const [updateMaterial, setUpdateMaterial] = useState(null)
 
     const handleOpen = () => setOpen(true);
     const handleClose = () => {
         setOpen(false)
         setUpdateMaterial(null)
-        getAllMaterial()
+        setMateriais(api.getAllMateriais())
     }
 
     const handleChange = (event) => {
@@ -136,7 +138,7 @@ export const Inventario = () => {
             '/categoria',
         ).then((res) => {
             // console.log(res.data)
-            setCategoria(res.data)
+            setCategorias(res.data)
             console.log(res.data)
 
         }).catch((err) => {
@@ -144,26 +146,26 @@ export const Inventario = () => {
         })
     }
 
-    const getAllPessoas = async () => {
-        api.get(
-            '/pessoas'
-        ).then((res) => {
-            setPessoa(res.data)
-        }).catch((err) => {
-            console.log("Erro no get de pessoas" + JSON.stringify(err))
-        })
-    }
+    // const getAllPessoas = async () => {
+    //     api.get(
+    //         '/pessoas'
+    //     ).then((res) => {
+    //         setPessoa(res.data)
+    //     }).catch((err) => {
+    //         console.log("Erro no get de pessoas" + JSON.stringify(err))
+    //     })
+    // }
 
-    const getAllMaterial = async () => {
-        api.get(
-            '/historico/simples'
-            // {headers:"Authorization: " + ` Bearer `},
-        ).then(res => {
-            setMateriais(res.data)
-        }).catch((err) => {
-            console.log('Erro na requisição get material: ' + JSON.stringify(err))
-        })
-    }
+    // const getAllMaterial = async () => {
+    //     api.get(
+    //         '/historico/simples'
+    //         // {headers:"Authorization: " + ` Bearer `},
+    //     ).then(res => {
+    //         setMateriais(res.data)
+    //     }).catch((err) => {
+    //         console.log('Erro na requisição get material: ' + JSON.stringify(err))
+    //     })
+    // }
 
     const itemFiltro = materiais?.filter((item) => item.nome?.toUpperCase().includes(busca.toUpperCase())
         || item.descricao?.toUpperCase().includes(busca.toUpperCase())
@@ -186,10 +188,15 @@ export const Inventario = () => {
 
 
     useEffect(() => {
-        getAllPessoas()
-        getAllCategoria()
-        getAllMaterial()
-
+        async function fetch() {
+        const pessoas = await api2.getAllPessoas()
+        // const cats = await api2.getAllCategorias()
+        const mats = await api2.getAllMateriais()
+        // setCategorias(cats)
+        setMateriais(mats)
+    }
+    fetch()
+    getAllCategoria()
     }, [])
 
     useEffect(() => {
@@ -250,6 +257,11 @@ export const Inventario = () => {
     return (
         <>
             <Wrapper>
+                <button onClick={() =>{
+                    console.log(pessoa  )
+                    console.log(materiais)
+                    console.log(categoria)
+                }}> DEBUG </button>
                 <Pesquisa>
                     <div>
                         <h1>Inventário de Materiais</h1>

@@ -3,7 +3,7 @@ import { ItemListaManutencaoAdm } from "../../Components/ItemListaManutencaoAdm"
 import { StackAdmin } from "../../Components/StackAdmin"
 import {Box, Geral} from "./style.js"
 import { ItemManutencao } from "../../Components/ItemManutencao";
-function PainelManutencao(props) {
+function PainelManutencao(props) {  
   const navigate = useNavigate();
 
   return (
