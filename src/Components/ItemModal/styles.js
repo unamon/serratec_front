@@ -111,7 +111,7 @@ export const Geral = styled.div`
          color:#ff911e;
      }
    .MiniCaixa.green {
-         color: #5cfd0f;
+        color: #5cfd0f;
      }
    .MiniCaixa.yellow {
          color: yellow;

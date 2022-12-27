@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { api } from "../../Services/api";
+import React from 'react';
 import { ItemWrapper, Item } from "./styles";
 
-export const ListaItemsMini = ({ items }) => {
+export const ListaItemsMini = ({ items, handleOpenModal }) => {
 
     return (
         <ItemWrapper>
             {items?.map(item => (
-                <Item key={item?.id}>
+                <Item key={item?.id} onClick={()=>{handleOpenModal(item?.id)}}>
                     <div className={"MiniCaixa " + decideColor(item?.status)}>
                         <span>{item?.status}</span>
                     </div>

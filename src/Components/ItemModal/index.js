@@ -1,25 +1,9 @@
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Unstable_Grid2';
-import { useState } from "react"
 import { Styles, Info, Geral} from "./styles"
-import { api } from '../../Services/api';
 
-export const ItemModal = ({ modalOpen, handleCloseModal, materialModal }) => {
-    const [historico, setHistorico] = useState()
-
-    const getHistorico = () => {
-        api.get(`/historico/material/${materialModal?.id}`)
-            .then((res) => {
-                setHistorico(res.data)
-            }).catch((err) => {
-                console.log(JSON.stringify(err))
-            })
-    }
-
-    useState(() => {
-        getHistorico()
-    }, [modalOpen])
+export const ItemModal = ({ modalOpen, handleCloseModal, materialModal,historico }) => {
 
     return (
         <Modal
@@ -72,7 +56,7 @@ export const ItemModal = ({ modalOpen, handleCloseModal, materialModal }) => {
                         </Info>
                         {historico?.map((hist) => (
                             <Geral key={hist.id}>
-                                <div className={"MiniCaixa "}>
+                                <div className={"MiniCaixa " + decideColor(hist.status.nome)}>
                                     <span>{hist.status.nome}</span>
                                 </div>
                                 <div className="text">
@@ -93,4 +77,25 @@ export const ItemModal = ({ modalOpen, handleCloseModal, materialModal }) => {
         </Modal>
 
     )
+}
+
+
+const decideColor = (status) => {
+    let color;
+    switch (status) {
+        case "Manutenção":
+            color = "orange"
+            break
+        case "Empréstimo":
+            color = "yellow"
+            break
+        case "Disponível":
+            color = "green"
+            break
+        case "Indisponível":
+        default:
+            color = "gray"
+            break
+    }
+    return color;
 }

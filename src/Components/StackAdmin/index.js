@@ -1,22 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 //import materialUI
-import Stack from '@mui/material/Stack';
-import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
+import Modal from '@mui/material/Modal';
+import Stack from '@mui/material/Stack';
 
 import { admPagePdf } from "../../Reports/AdmPage/adm";
 
 //import imagens
-import computador from "../../Images/iconeComputador.png"
-import folha from "../../Images/iconeFolha.png"
-import lista from "../../Images/iconeListar.png"
-import adicionar from "../../Images/iconeAdicionar.png"
-import perfil from "../../Images/serratec.png"
+import adicionar from "../../Images/iconeAdicionar.png";
+import computador from "../../Images/iconeComputador.png";
+import folha from "../../Images/iconeFolha.png";
+import lista from "../../Images/iconeListar.png";
+import perfil from "../../Images/serratec.png";
 
-import { Geral, Img, Perfil } from "./style";
-import { Grid, InputLabel, Select, MenuItem, FormGroup, FormControlLabel, Checkbox, RadioGroup, Radio } from "@mui/material";
+import { FormControlLabel, Grid, InputLabel, MenuItem, Radio, RadioGroup, Select } from "@mui/material";
 import DatePicker from "react-datepicker";
 import { toast } from "react-toastify";
+import { Geral, Img, Perfil } from "./style";
 
 import { api } from "../../Services/api";
 
@@ -173,7 +173,6 @@ export const StackAdmin = () => {
             '/materiais'
         ).then(res => {
             setMateriais(res.data)
-            console.log(res.data)
         }).catch((err) => {
 
         })
@@ -337,19 +336,6 @@ export const StackAdmin = () => {
                         
                         <Grid xs={12}>
                             <InputLabel style={label}>Origem</InputLabel>
-                            {/* <Select
-                                xs={select}
-                                labelId="demo-simple-select-label"
-                                id="demo-simple-select"
-                                value={origemMaterial}
-                                onChange={(e) => setOrigemMaterial(e.target.value)}
-                                displayEmpty
-                                inputProps={{ 'aria-label': 'Without label' }}
-                            >
-                                <MenuItem value="AQUISICAO">AQUISICAO</MenuItem>
-                                <MenuItem value="ALUGUEL">ALUGUEL</MenuItem>
-                                <MenuItem value="DOACAO">DOACAO</MenuItem>
-                            </Select> */}
                             <RadioGroup row onChange={e => {setOrigemMaterial(e.target.value)}}>
                                 <FormControlLabel value={"AQUISICAO"} control={<Radio defaultChecked />} label="Aquisição" />
                                 <FormControlLabel value={"DOACAO"} control={<Radio />} label="Doação" />
