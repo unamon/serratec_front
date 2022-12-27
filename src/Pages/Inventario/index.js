@@ -39,7 +39,7 @@ export const Inventario = () => {
     const [nome, setNome] = useState()
     const [busca, setBusca] = useState("")
     const [materiais, setMateriais] = useState([])
-    const [pessoa, setPessoas] = useState([])
+    const [pessoas, setPessoas] = useState([])
     const [categoria, setCategorias] = useState([])
     const [descricao, setDescricao] = useState()
     const [categoriaId, setCategoriaId] = useState()
@@ -146,26 +146,26 @@ export const Inventario = () => {
         })
     }
 
-    // const getAllPessoas = async () => {
-    //     api.get(
-    //         '/pessoas'
-    //     ).then((res) => {
-    //         setPessoa(res.data)
-    //     }).catch((err) => {
-    //         console.log("Erro no get de pessoas" + JSON.stringify(err))
-    //     })
-    // }
+    const getAllPessoas = async () => {
+        api.get(
+            '/pessoas'
+        ).then((res) => {
+            setPessoas(res.data)
+        }).catch((err) => {
+            console.log("Erro no get de pessoas" + JSON.stringify(err))
+        })
+    }
 
-    // const getAllMaterial = async () => {
-    //     api.get(
-    //         '/historico/simples'
-    //         // {headers:"Authorization: " + ` Bearer `},
-    //     ).then(res => {
-    //         setMateriais(res.data)
-    //     }).catch((err) => {
-    //         console.log('Erro na requisição get material: ' + JSON.stringify(err))
-    //     })
-    // }
+    const getAllMaterial = async () => {
+        api.get(
+            '/historico/simples'
+            // {headers:"Authorization: " + ` Bearer `},
+        ).then(res => {
+            setMateriais(res.data)
+        }).catch((err) => {
+            console.log('Erro na requisição get material: ' + JSON.stringify(err))
+        })
+    }
 
     const itemFiltro = materiais?.filter((item) => item.nome?.toUpperCase().includes(busca.toUpperCase())
         || item.descricao?.toUpperCase().includes(busca.toUpperCase())
@@ -188,14 +188,8 @@ export const Inventario = () => {
 
 
     useEffect(() => {
-        async function fetch() {
-        const pessoas = await api2.getAllPessoas()
-        // const cats = await api2.getAllCategorias()
-        const mats = await api2.getAllMateriais()
-        // setCategorias(cats)
-        setMateriais(mats)
-    }
-    fetch()
+    getAllMaterial()
+    getAllPessoas()
     getAllCategoria()
     }, [])
 
@@ -258,7 +252,7 @@ export const Inventario = () => {
         <>
             <Wrapper>
                 <button onClick={() =>{
-                    console.log(pessoa  )
+                    console.log(pessoas)
                     console.log(materiais)
                     console.log(categoria)
                 }}> DEBUG </button>
@@ -330,7 +324,7 @@ export const Inventario = () => {
                                             displayEmpty
                                             onChange={handlePessoa}
                                             inputProps={{ 'aria-label': 'Without label' }}>
-                                            {pessoa?.map((pes) => (
+                                            {pessoas?.map((pes) => (
                                                 <MenuItem pessoa={pes} key={"pes-" + pes.id} value={pes.id}>{pes.nome}</MenuItem>
                                             ))}
                                         </Select>

@@ -1,48 +1,69 @@
 import { ItemListaMateriasAdm } from "../../Components/ItemListaMateriasAdm";
 import { ItemListaManutencao } from "../../Components/ItemListaManutencaoAdm";
 import { StackAdmin } from "../../Components/StackAdmin"
-import { Geral } from "./style.js"
+import { Geral, Styles } from "./style.js"
 import { Grid } from "@mui/material"
-
-const title = {
-  fontSize: 18,
-  fontFamily: "Inter",
-  fontWeight: 600,
-  marginBottom: ".5em",
-  textAlign: "center"
-}
-
-const box = {
-  marginTop: 10,
-  display: "flex",
-  justifyContent: "space-evenly"
-}
-
-const container = {
-  display: "flex",
-  flexDirection: "column",
-  alignContent: "center",
-  justifyContent: "center"
-}
+import { useEffect, useState } from "react";
+import { api } from "../../Services/api";
+import { ItemModal } from "../../Components/ItemModal";
+import { ListaItemsMini } from "../../Components/ListaItemsMini";
 
 function PainelAdministrativo() {
+  const [materiais, setMateriais] = useState([])
+  const [mOpen, setMOpen] = useState(false)
+  const [materialModal, setMaterialModal] = useState()
+
+  const handleOpen = (id) => {
+    api.get(
+      '/materiais/' + id
+    ).then(res => {
+      setMaterialModal(res.data)
+      console.log(res.data)
+    }).catch((err) => {
+      console.log(JSON.stringify(err))
+    })
+    setMOpen(true)
+  }
+
+  const handleClose = () => {
+    setMaterialModal(null)
+    setMOpen(false)
+  }
+
+  const getAllMaterial = async () => {
+    api.get(
+      '/historico/simples'
+    ).then(res => {
+      setMateriais(res.data)
+    }).catch((err) => {
+      console.log('Erro na requisição get material: ' + JSON.stringify(err))
+    })
+  }
+
+  useEffect(() => {
+    getAllMaterial()
+  }, [])
+
+
   return (
     <Geral >
       <StackAdmin />
-      <Grid container style={box}>
+      <Grid container style={Styles.box}>
         <Grid >
-          <div style={container}>
-            <h3 style={title}>Materiais em manutenção</h3>
-            <ItemListaManutencao />
+          <div style={Styles.container}>
+            <h3 style={Styles.title}>Materiais em manutenção</h3>
+            <ListaItemsMini items={materiais} />
+            {/* <ItemListaManutencao items={materiais} modalOpen={handleOpen}/> */}
           </div>
         </Grid>
         <Grid>
-          <div style={container}>
-            <h3 style={title} >Inventário de materiais</h3>
+          <div style={Styles.container}>
+            <h3 style={Styles.title} >Inventário de materiais</h3>
             <ItemListaMateriasAdm />
           </div>
         </Grid>
       </Grid>
+      <ItemModal materialModal={materialModal} modalOpen={mOpen} handleCloseModal={handleClose} />
     </Geral>
 
   );

@@ -1,5 +1,27 @@
 import styled from "styled-components";
 
+export const Styles = {
+   title: {
+      fontSize: 18,
+      fontFamily: "Inter",
+      fontWeight: 600,
+      marginBottom: ".5em",
+      textAlign: "center"
+   },
+
+   box: {
+      marginTop: 10,
+      display: "flex",
+      justifyContent: "space-evenly"
+   },
+
+   container: {
+      display: "flex",
+      flexDirection: "column",
+      alignContent: "center",
+      justifyContent: "center"
+   }
+}
 export const Geral = styled.div`
    margin-top: 7rem;
    margin-bottom: 2rem;
