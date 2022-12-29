@@ -59,16 +59,16 @@ function PainelAdministrativo() {
         <Grid >
           <div style={Styles.container}>
             <h3 style={Styles.title}>Materiais em manutenção</h3>
-            <ListaItemsMini items={materiais} handleOpenModal={handleOpen}/>
+            <ListaItemsMini items={materiais?.filter(item => {
+              return(item.status === "Manutenção")
+            })} handleOpenModal={handleOpen}/>
             {/* <ItemListaManutencao items={materiais} modalOpen={handleOpen}/> */}
           </div>
         </Grid>
         <Grid>
           <div style={Styles.container}>
             <h3 style={Styles.title} >Inventário de materiais</h3>
-            <ListaItemsMini items={materiais?.filter(item => {
-              return(item.status === "Manutenção")
-            })} handleOpenModal={handleOpen}/>
+            <ListaItemsMini items={materiais} handleOpenModal={handleOpen}/>
           </div>
         </Grid>
       </Grid>

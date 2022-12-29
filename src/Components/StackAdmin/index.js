@@ -16,76 +16,10 @@ import perfil from "../../Images/serratec.png";
 import { FormControlLabel, Grid, InputLabel, MenuItem, Radio, RadioGroup, Select } from "@mui/material";
 import DatePicker from "react-datepicker";
 import { toast } from "react-toastify";
-import { Geral, Img, Perfil } from "./style";
+import { Styles, Geral, Img, Perfil } from "./style";
 
 import { api } from "../../Services/api";
 
-const style = {
-    fontFamily: "Inter",
-    color: "black",
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    borderRadius: "1em",
-    border: '2px solid darkgray',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-};
-
-const select = {
-    width: "10rem",
-    height: 32,
-    color: '#323232',
-    bgcolor: '#ccc',
-};
-
-const label = {
-    color: "black",
-    fontWeight: 500,
-    fontFamily: "Inter",
-    fontSize: 16,
-    marginTop:".8rem"
-}
-
-const button = {
-    border: "none",
-    borderRadius: "2em",
-    padding: ".2em",
-    fontSize: 16,
-    fontFamily: "Inter",
-    fontWeight: 600,
-    width: "8em",
-    height: "2em",
-    marginTop: "1.4em",
-    cursor: "pointer"
-}
-
-const input = {
-    border: "2px solid black",
-    borderRadius: ".5em",
-    padding: ".2em",
-    fontSize: 14,
-    width: "80%",
-    height: "2em",
-    cursor: "pointer"
-}
-
-const textArea = {
-    width: "100%",
-    borderRadius: "1rem",
-    border: "2px solid dargray",
-    height: "4rem",
-    resize: "none",
-}
-
-const formControl = {
-    display:"flex",
-    flexDirection: "row"
-}
 export const StackAdmin = () => {
     const [categorias, setCategorias] = useState()
     const [pessoas, setPessoas] = useState()
@@ -102,7 +36,6 @@ export const StackAdmin = () => {
     const [openManutencao, setOpenManutencao] = useState()
     const [materiais, setMateriais] = useState([])
     const [material, setMaterial] = useState(null)
-    // const [historico, setHistorico] = useState(null)
     const [idPessoaResponsavel, setIdPessoaResponsavel] = useState(null)
     const [obs, setObs] = useState(null)
     const [idStatus, setIdStatus] = useState(null)
@@ -260,22 +193,22 @@ export const StackAdmin = () => {
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
-                <Box sx={style}>
+                <Box sx={Styles.style}>
                     <Grid container spacing={1} justifyContent={"center"}>
                         <Grid xs={12}>
                             <h1>Cadastro de Materiais</h1>
                         </Grid>
                         <Grid xs={12} md={6}>
-                            <InputLabel style={label}>Nome</InputLabel>
+                            <InputLabel style={Styles.label}>Nome</InputLabel>
                             <input
-                                style={input}
+                                style={Styles.input}
                                 placeholder="Nome"
                                 onChange={(e) => { setNomeMaterial(e.target.value) }} />
                         </Grid>
                         <Grid xs={12} md={6}>
-                            <InputLabel style={label}>Categoria</InputLabel>
+                            <InputLabel style={Styles.label}>Categoria</InputLabel>
                             <Select
-                                sx={select}
+                                sx={Styles.select}
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
                                 value={catMaterial}
@@ -290,14 +223,14 @@ export const StackAdmin = () => {
                             {/* <input placeholder="Tipo" style={{ padding: 5, borderRadius: 2, borderColor: '#E8E7E7', width: 300, marginBottom: 10 }} /> */}
                         </Grid>
                         <Grid xs={12}>
-                            <InputLabel style={label}>Descrição</InputLabel>
-                            <textarea style={textArea}
+                            <InputLabel style={Styles.label}>Descrição</InputLabel>
+                            <textarea style={Styles.textArea}
                                 onChange={(e) => setObs(e.target.value)} />
                         </Grid>
                         <Grid xs={12}>
-                            <InputLabel style={label}>Dono</InputLabel>
+                            <InputLabel style={Styles.label}>Dono</InputLabel>
                             <Select
-                                sx={select}
+                                sx={Styles.select}
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
                                 value={donoMaterial}
@@ -312,22 +245,22 @@ export const StackAdmin = () => {
                             {/* <input placeholder="Dono" style={{ padding: 5, borderRadius: 2, borderColor: '#E8E7E7', width: 300, marginBottom: 10 }} /> */}
                         </Grid>
                         <Grid xs={12}>
-                            <InputLabel style={label}>Data Entrega</InputLabel>
+                            <InputLabel style={Styles.label}>Data Entrega</InputLabel>
                             <DatePicker
                                 // className="date"
                                 selected={dataEnt}
-                                xs={select}
+                                style={Styles.formControl}
                                 onChange={(e) => setDataEnt(e)}
                                 dateFormat='dd/MM/yyyy'
 
                             />
                         </Grid>
                         {origemMaterial === "ALUGUEL" ? <Grid xs={12}>
-                            <InputLabel style={label}>Data Devolução</InputLabel>
+                            <InputLabel style={Styles.label}>Data Devolução</InputLabel>
                             <DatePicker
                                 // className="date"
                                 selected={dataDev}
-                                xs={select}
+                                style={Styles.formControl}
                                 onChange={(e) => setDataDev(e)}
                                 dateFormat='dd/MM/yyyy'
 
@@ -335,7 +268,7 @@ export const StackAdmin = () => {
                         </Grid> : null}
                         
                         <Grid xs={12}>
-                            <InputLabel style={label}>Origem</InputLabel>
+                            <InputLabel style={Styles.label}>Origem</InputLabel>
                             <RadioGroup row onChange={e => {setOrigemMaterial(e.target.value)}}>
                                 <FormControlLabel value={"AQUISICAO"} control={<Radio defaultChecked />} label="Aquisição" />
                                 <FormControlLabel value={"DOACAO"} control={<Radio />} label="Doação" />
@@ -343,12 +276,12 @@ export const StackAdmin = () => {
                             </RadioGroup>
                         </Grid>
                         <Grid xs={12}>
-                            <InputLabel style={label}>Nota Fiscal</InputLabel>
+                            <InputLabel style={Styles.label}>Nota Fiscal</InputLabel>
                             <input
                                 type={"file"}
                                 onChange={(e) => { setFile(e.target.files[0]) }} />
                         </Grid>
-                        <button style={button} onClick={() => { SubmitMaterial() }}>Enviar</button>
+                        <button style={Styles.button} onClick={() => { SubmitMaterial() }}>Enviar</button>
                     </Grid>
                 </Box>
             </Modal>
@@ -358,15 +291,15 @@ export const StackAdmin = () => {
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
-                <Box sx={style}>
+                <Box sx={Styles.style}>
                     <Grid container spacing={1} justifyContent={"center"}>
                         <Grid xs={12} marginBottom={3}>
                             <h1>Associação de Materiais</h1>
                         </Grid>
                         <Grid xs={6}>
-                            <InputLabel style={label}>Material</InputLabel>
+                            <InputLabel style={Styles.label}>Material</InputLabel>
                             <Select
-                                sx={select}
+                                sx={Styles.select}
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
                                 value={material}
@@ -381,9 +314,9 @@ export const StackAdmin = () => {
                             </Select>
                         </Grid>
                         <Grid xs={6}>
-                            <InputLabel style={label}>Responsável</InputLabel>
+                            <InputLabel style={Styles.label}>Responsável</InputLabel>
                             <Select
-                                sx={select}
+                                sx={Styles.select}
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
                                 value={idPessoaResponsavel}
@@ -398,12 +331,12 @@ export const StackAdmin = () => {
 
                         </Grid>
                         <Grid xs={12} marginTop={2}>
-                            <InputLabel style={label}>Observações</InputLabel>
-                            <textarea style={textArea}
+                            <InputLabel style={Styles.label}>Observações</InputLabel>
+                            <textarea style={Styles.textArea}
                                 onChange={(e) => setObs(e.target.value)} />
                         </Grid>
                         {/* <Grid xs={12} justifyContent={"center"} > */}
-                        <button style={button} onClick={() => { associacaoMaterial() }}>Associar</button>
+                        <button style={Styles.button} onClick={() => { associacaoMaterial() }}>Associar</button>
                         {/* </Grid> */}
                     </Grid>
                 </Box>
@@ -414,15 +347,15 @@ export const StackAdmin = () => {
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
-                <Box sx={style}>
+                <Box sx={Styles.style}>
                 <Grid container spacing={1} justifyContent={"center"}>
                         <Grid xs={8}>
                             <h1>Materiais para manutenção</h1>
                         </Grid>
                         <Grid xs={6}>
-                            <InputLabel style={label}>Material</InputLabel>
+                            <InputLabel style={Styles.label}>Material</InputLabel>
                             <Select
-                                sx={select}
+                                sx={Styles.select}
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
                                 value={material}
@@ -436,9 +369,9 @@ export const StackAdmin = () => {
                             </Select>
                         </Grid>
                         <Grid xs={6}>
-                            <InputLabel style={label}>Manutencionista</InputLabel>
+                            <InputLabel style={Styles.label}>Manutencionista</InputLabel>
                             <Select
-                                sx={select}
+                                sx={Styles.select}
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
                                 value={idPessoaResponsavel}
@@ -453,12 +386,12 @@ export const StackAdmin = () => {
 
                         </Grid>
                         <Grid xs={12}>
-                        <InputLabel style={label}>Observações</InputLabel>
-                            <textarea style={textArea}
+                        <InputLabel style={Styles.label}>Observações</InputLabel>
+                            <textarea style={Styles.textArea}
                                 onChange={(e) => setObs(e.target.value)} />
                         </Grid>
 
-                        <button style={button} onClick={manutencaoMaterial} >Associar</button>
+                        <button style={Styles.button} onClick={manutencaoMaterial} >Associar</button>
 
                     </Grid>
                 </Box>

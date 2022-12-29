@@ -1,7 +1,30 @@
 import styled from "styled-components";
 
+export const Styles = {
+   title: {
+      fontSize: 18,
+      fontFamily: "Inter",
+      fontWeight: 600,
+      marginBottom: ".5em",
+      textAlign: "center"
+   },
+
+   box: {
+      marginTop: 10,
+      display: "flex",
+      justifyContent: "space-evenly"
+   },
+
+   container: {
+      display: "flex",
+      flexDirection: "column",
+      alignContent: "center",
+      justifyContent: "center"
+   }
+}
 export const Geral = styled.div`
-   margin-top: 10rem;
+   margin-top: 7rem;
+   margin-bottom: 2rem;
 `
 
 export const Box = styled.div`
@@ -11,6 +34,6 @@ export const Box = styled.div`
 
    h4{
     margin-bottom: 5%;
-    font-size:24px;
    }
 `
+

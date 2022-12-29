@@ -32,8 +32,6 @@ import { ApiComm, api } from "../../Services/api";
 //import Reports
 import { inventarioPdf } from "../../Reports/Inventario";
 
-const api2 = new ApiComm()
-
 export const Inventario = () => {
     const [open, setOpen] = useState(false)
     const [nome, setNome] = useState()
@@ -376,17 +374,6 @@ export const Inventario = () => {
                         <input type='text' size="50" value={busca} placeholder="buscar material" onChange={(e) => setBusca(e.target.value)} />
                     </Stack>
                 </Pesquisa>
-                                
-                {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
-                        <Stack style={{width:175, height:70, marginTop:10}}>
-                            <DesktopDatePicker
-                                inputFormat="DD/MM/YYYY"
-                                value={date}
-                                onChange={() =>handleDate(dateEnt)}
-                                renderInput={(params) => <TextField {...params} />}
-                            />
-                        </Stack>                                            
-                    </LocalizationProvider> */}
                     <Barra>
                         <div className={"MiniCaixa "}>
                             <span className="text-status" >STATUS</span>
@@ -405,7 +392,6 @@ export const Inventario = () => {
                         </div>
                     </Barra>
                  <ItemInventario props={itemFiltro} updateModal={updateModal}/>
-
             </Wrapper>
         </>
     )

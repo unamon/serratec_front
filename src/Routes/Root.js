@@ -9,8 +9,6 @@ import ManuPedido from '../Pages/ManuPedido'
 import { Carrinho } from '../Pages/Carrinho'
 import { Inventario } from '../Pages/Inventario'
 import PainelAdministrativo from '../Pages/PainelAdministrativo'
-import { ManutencaoNova } from '../Pages/ManutencaoNova'
-
 import { DataProvider, DataContext } from '../Context/data'
 import { useEffect } from 'react'
 
@@ -45,7 +43,7 @@ export const Root = () => {
     <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/registro" element={<Registro />} />
-        <Route path="/manutencao" element={<ManutencaoNova />} />
+        <Route path="/manutencao" element={<PainelManutencao />} />
           <Route path="/adm" element={<PainelAdministrativo /> } />
           <Route path="/inventario" element={<Private><Inventario /></Private>} />
         <Route path="/painel_manutencao" element={<PainelManutencao />} />
