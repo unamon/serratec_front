@@ -249,11 +249,6 @@ export const Inventario = () => {
     return (
         <>
             <Wrapper>
-                <button onClick={() =>{
-                    console.log(pessoas)
-                    console.log(materiais)
-                    console.log(categoria)
-                }}> DEBUG </button>
                 <Pesquisa>
                     <div>
                         <h1>Inventário de Materiais</h1>

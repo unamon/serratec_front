@@ -13,8 +13,6 @@ import {RadioGroup, Radio, FormControlLabel} from "@mui/material"
 
 import "./foto.css"
 
-
-
 export const Registro = () => {
   const [nome, setNome] = useState('')
   const [nomeFantasia, setFantasia] = useState('')
@@ -103,11 +101,6 @@ export const Registro = () => {
 
     console.log(foto)
   }
-
-  useEffect(() =>{
-    
-  })
-
   const style = {
     width:'100%',
     backgroundColor:"#ccc"
@@ -115,10 +108,6 @@ export const Registro = () => {
   
   const teste = {
     color: '#000',
-  }
-
-  const teste2 ={
-    justifyContent: 'space-evenly'
   }
 
   return (
@@ -129,7 +118,7 @@ export const Registro = () => {
         <Grid container spacing={2}>
           <Grid xs={12}>
             <InputLabel style={{fontSize: 20}}>Tipo de Pessoa</InputLabel>
-            <RadioGroup sx={teste2} row onChange={e => {setTipoPessoa(e.target.value)}}>
+            <RadioGroup sx={teste} row onChange={e => {setTipoPessoa(e.target.value)}}>
                 <FormControlLabel sx={teste} value={"F"} control={<Radio defaultChecked />} label="Física" />
                 <FormControlLabel sx={teste} value={"J"} control={<Radio />} label="Jurídica" />
             </RadioGroup>
@@ -150,14 +139,17 @@ export const Registro = () => {
             <InputLabel style={{fontSize: 20}}>CPF</InputLabel>
            <Input type="text" Length={11} minLength={11}  onChange={(event) => setCpf(event.target.value)}/>
           </Grid>
-          {tipoPessoa === "J" ? <Grid xs={6}>
+          {tipoPessoa === "J" ?
+          <>
+           <Grid xs={6}>
             <InputLabel style={{fontSize: 20}}>CNPJ</InputLabel>
             <Input  type="text" placeholder="pessoa jurídica" maxLength={14} onChange ={((e) => setCnpj(e.target.value))}/>
-          </Grid>: null}
-          {tipoPessoa === "J" ? <Grid xs={6}>
+          </Grid>
+          <Grid xs={6}>
             <InputLabel style={{fontSize: 20}}>Razão Social</InputLabel>
             <Input type="text" placeholder="pessoa jurídica"  onChange={((e) =>setRazaoSocial(e.target.value))}/>
-          </Grid> : null}
+          </Grid>
+          </> : null}
           <Grid xs={6}>
             <InputLabel style={{fontSize: 20}}>Tipo de acesso</InputLabel>
             
